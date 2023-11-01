@@ -1,0 +1,81 @@
+SCRIPTS PARA CRIAÇAO DO BANCO DE DADOS E TABELAS
+
+CREATE TABLE 'cartoes' ('partida_id' INTEGER,'clube' TEXT,'cartao' TEXT,'atleta' TEXT,'posicao' TEXT,'minuto' TEXT);
+CREATE TABLE 'gols' ('partida_id' INTEGER,'clube' TEXT,'atleta' TEXT,'minuto' TEXT,'tipo_de_gol' TEXT);
+CREATE TABLE 'partidas' ('partida_id' INTEGER,'rodada' INTEGER,'data' TEXT,'hora' TEXT,'mandante' TEXT,'visitante' TEXT,'tecnico_mandante' TEXT,'tecnico_visitante' TEXT,'vencedor' TEXT,'arena' TEXT,'mandante_placar' INTEGER,'visitante_placar' INTEGER,'mandante_estado' TEXT,'visitante_estado' TEXT);
+
+QUESTÃO 1 - VITORIAS
+
+Quantas partidas cada clube venceu?
+
+Query utilizada:
+
+SELECT vencedor, COUNT(vencedor) FROM partidas
+WHERE vencedor NOT LIKE '-'
+GROUP BY vencedor HAVING COUNT(vencedor)
+;
+
+Quais times foram os maiores vencedores? 
+
+Query utilizada:
+
+SELECT vencedor, COUNT(vencedor) FROM partidas
+WHERE vencedor NOT LIKE '-'
+GROUP BY vencedor HAVING COUNT(vencedor)
+ORDER BY count(vencedor) DESC
+limit 5
+;
+
+Quais times ficaram com menos vitórias?
+
+Query utilizada:
+
+SELECT vencedor, COUNT(vencedor) FROM partidas
+WHERE vencedor NOT LIKE '-'
+GROUP BY vencedor HAVING COUNT(vencedor)
+ORDER BY count(vencedor) asc
+limit 5
+;
+
+QUESTAO 2 - CARTOES VERMELHOS E AMARELOS
+
+Quais times levaram o maior numero de cartões?
+
+Query utilizada:
+
+SELECT clube, COUNT(clube) FROM cartoes
+GROUP BY clube HAVING COUNT(clube)
+ORDER BY count(clube) desc
+LIMIT 5
+;
+
+Quais jogadores receberam o maior número de cartões?
+
+Query utilizada:
+
+SELECT atleta, COUNT(atleta) FROM cartoes
+GROUP BY atleta HAVING COUNT(atleta)
+ORDER BY count(atleta) desc
+;
+
+QUESTÃO 3 - GOLS
+
+Quais times tiveram mais gols?
+
+Query utilizada:
+
+SELECT clube, COUNT(clube) FROM gols
+GROUP BY clube HAVING COUNT(clube)
+ORDER BY count(clube) desc
+LIMIT 5
+;
+
+Quem foram os maiores artilheiros de todas as partidas registradas nos dados?
+
+Query utilizada:
+
+SELECT atleta, COUNT(atleta) FROM gols
+GROUP BY atleta HAVING COUNT(atleta)
+ORDER BY count(atleta) desc
+;
+
